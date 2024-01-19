@@ -11,9 +11,9 @@ Desc employees;
 Desc offices;
 Desc orderdetails;
 Desc order;
-Desc patyment;
-Desc Productlines
-Desc product
+Desc payment;
+Desc Productlines;
+Desc product;
 ```
 # Data Cleaning
 ## a) Checking null or missing value
@@ -77,18 +77,15 @@ JOIN payments py ON o.customerNumber = py.customerNumber
 ## 3) Employee monitoring
 ```r[]
 SELECT
-    CONCAT_WS(' ', e.lastName, e.firstName) AS name,
-    e.jobTitle,
+    CONCAT_WS(' ', e.lastName, e.firstName) AS name, e.jobTitle,
     os.country,
     o.orderDate,
     od.quantityOrdered,
-    p.productName,
-    p.productLine,
+    p.productName, p.productLine,
     py.amount
 FROM employees e
 JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
 JOIN offices os ON e.officeCode = os.officeCode
-JOIN orders o ON c.customerNumber = o.customerNumber
 JOIN orderdetails od ON o.orderNumber = od.orderNumber
 JOIN products p ON od.productCode = p.productCode
 JOIN payments py ON o.customerNumber = py.customerNumber
