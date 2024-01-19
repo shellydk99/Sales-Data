@@ -77,15 +77,15 @@ JOIN payments py ON o.customerNumber = py.customerNumber
 ## 3) Employee monitoring
 ```r[]
 SELECT
+    c.salesRepEmployeeNumber
     CONCAT_WS(' ', e.lastName, e.firstName) AS name, e.jobTitle,
     os.country,
     o.orderDate,
     od.quantityOrdered,
-    p.productName, p.productLine,
     py.amount
 FROM employees e
 JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
 JOIN offices os ON e.officeCode = os.officeCode
+JOIN orders o ON c.customernumber = o.customerNumber
 JOIN orderdetails od ON o.orderNumber = od.orderNumber
-JOIN products p ON od.productCode = p.productCode
-JOIN payments py ON o.customerNumber = py.customerNumber
+JOIN payments py ON c.customerNumber = py.customerNumber
