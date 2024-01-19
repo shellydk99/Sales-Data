@@ -4,6 +4,7 @@
 USE u442155536_fb_test;
 SHOW TABLES;
 ```
+The tables are customers, employees, offices, orderdetails, order, payment, productlines, product
 ## b) Get to know about table
 ```r[]
 Desc customers;
@@ -12,7 +13,7 @@ Desc offices;
 Desc orderdetails;
 Desc order;
 Desc payment;
-Desc Productlines;
+Desc productlines;
 Desc product;
 ```
 # Data Cleaning
@@ -37,6 +38,7 @@ SELECT checkNumber, COUNT(*) FROM payments GROUP BY checkNumber HAVING COUNT(*) 
 SELECT productLine, COUNT(*) FROM productlines GROUP BY productLine HAVING COUNT(*) > 1;
 SELECT productCode, COUNT(*) FROM products GROUP BY productCode HAVING COUNT(*) > 1;
 ```
+There is no nduplicate founded
 ## c) Count and group by length
 ```r[]
 SELECT LENGTH(customerNumber) AS Length, COUNT(*) AS Count FROM customers GROUP BY Length;
@@ -78,7 +80,7 @@ JOIN payments py ON o.customerNumber = py.customerNumber
 ```r[]
 SELECT
     c.salesRepEmployeeNumber
-    CONCAT_WS(' ', e.lastName, e.firstName) AS name, e.jobTitle,
+    e.lastName AS employeeLastName, e.jobTitle,
     os.country,
     o.orderDate,
     od.quantityOrdered,
